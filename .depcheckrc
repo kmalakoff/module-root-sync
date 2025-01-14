@@ -1,1 +1,1 @@
-ignores: ["@types/*", "module-root-sync", "@biomejs/*"]
+ignores: ["module-root-sync"]
