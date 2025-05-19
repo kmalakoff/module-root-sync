@@ -8,8 +8,8 @@ const existsSync = (test) => {
     return false;
   }
 };
-import type { RootOptions } from './types';
-export * from './types';
+import type { RootOptions } from './types.js';
+export * from './types.js';
 export default function moduleRoot(dir: string, options: RootOptions = {}) {
   let current = dir;
   do {
