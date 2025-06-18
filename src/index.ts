@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+
 const existsSync = (test) => {
   try {
     (fs.accessSync || fs.statSync)(test);
@@ -8,7 +9,9 @@ const existsSync = (test) => {
     return false;
   }
 };
+
 import type { RootOptions } from './types.js';
+
 export * from './types.js';
 export default function moduleRoot(dir: string, options: RootOptions = {}) {
   let current = dir;
