@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const existsSync = (test) => {
+const existsSync = (test: string): boolean => {
   try {
     (fs.accessSync || fs.statSync)(test);
     return true;
