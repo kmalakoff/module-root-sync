@@ -10,9 +10,9 @@ const existsSync = (test) => {
   }
 };
 
-import type { RootOptions } from './types.js';
+import type { RootOptions } from './types.ts';
 
-export * from './types.js';
+export * from './types.ts';
 export default function moduleRoot(dir: string, options: RootOptions = {}) {
   let current = dir;
   do {
