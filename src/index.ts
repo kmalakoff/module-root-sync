@@ -14,9 +14,11 @@ import type { RootOptions } from './types.ts';
 
 export * from './types.ts';
 export default function moduleRoot(dir: string, options: RootOptions = {}) {
+  const name = options.name === undefined ? 'package.json' : options.name;
+
   let current = dir;
   do {
-    const packagePath = path.join(current, 'package.json');
+    const packagePath = path.join(current, name);
     if (existsSync(packagePath)) {
       if (!options.keyExists) return current;
       if (JSON.parse(fs.readFileSync(packagePath, 'utf8'))[options.keyExists] !== undefined) return current;
