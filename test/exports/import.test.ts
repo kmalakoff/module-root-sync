@@ -1,6 +1,5 @@
 import assert from 'assert';
 
-// @ts-ignore
 import moduleRoot from 'module-root-sync';
 
 describe('exports .ts', () => {

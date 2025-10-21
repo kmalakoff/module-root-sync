@@ -1,5 +1,4 @@
 import assert from 'assert';
-// @ts-ignore
 import moduleRoot from 'module-root-sync';
 import path from 'path';
 import url from 'url';
