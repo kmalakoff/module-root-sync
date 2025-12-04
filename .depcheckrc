@@ -1,1 +1,1 @@
-ignores: ["node-version-use", "ts-dev-stack", "@biomejs/biome", "module-root-sync"]
+ignores: ["node-version-use", "ts-dev-stack", "module-root-sync"]
