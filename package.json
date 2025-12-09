@@ -1,6 +1,6 @@
 {
   "name": "module-root-sync",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Finds the directory that the modules resides in",
   "keywords": [
     "package",
