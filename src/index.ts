@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE);
+
 const existsSync = (test: string): boolean => {
   try {
     (fs.accessSync || fs.statSync)(test);
@@ -36,6 +38,11 @@ const fileURLToPath = (input: PathLike): string => {
 
   // Decode URL-encoded characters (%20 -> space, etc.)
   filepath = decodeURIComponent(filepath);
+
+  // Convert forward slashes to backslashes on Windows
+  if (isWindows) {
+    filepath = filepath.split('/').join('\\');
+  }
 
   return filepath;
 };
