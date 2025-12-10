@@ -66,13 +66,27 @@ describe('module-root-sync', () => {
     assert.equal(root, DATA);
   });
 
-  it('does not find root - keyExists', () => {
-    try {
-      moduleRoot(__dirname, { keyExists: 'junkityjunk' });
-      assert.ok(false);
-    } catch (err) {
-      assert.ok(err.message.indexOf('Root not found') === 0);
-    }
+  // Synthetic package.json detection tests
+  describe('synthetic package.json', () => {
+    const DIST_ESM = path.join(path.dirname(path.dirname(__dirname)), 'dist', 'esm');
+
+    it('skips synthetic package.json by default', () => {
+      // Starting from dist/esm which has { "type": "module" }
+      // Should find the root package.json (with name field), not dist/esm/package.json
+      const root = moduleRoot(DIST_ESM);
+      assert.equal(root, path.dirname(path.dirname(__dirname)));
+    });
+
+    it('finds synthetic package.json with includeSynthetic: true', () => {
+      const root = moduleRoot(DIST_ESM, { includeSynthetic: true });
+      assert.equal(root, DIST_ESM);
+    });
+
+    it('does not apply synthetic check to custom name option', () => {
+      // When using a custom name, synthetic detection should not apply
+      const root = moduleRoot(DATA, { name: 'tsconfig.json' });
+      assert.equal(root, DATA);
+    });
   });
 
   it('does not find root - name', () => {

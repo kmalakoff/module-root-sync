@@ -1,6 +1,7 @@
 export interface RootOptions {
   name?: string;
-  keyExists?: string;
+  /** Include synthetic package.json files (only `type` field, no `name`). Default: false */
+  includeSynthetic?: boolean;
 }
 
 /** A filesystem path string or file:// URL (string or URL object) */
