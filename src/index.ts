@@ -50,16 +50,34 @@ const fileURLToPath = (input: PathLike): string => {
 import type { RootOptions } from './types.ts';
 
 export * from './types.ts';
+
+/**
+ * Check if a package.json is synthetic (no `name` field).
+ * Synthetic package.json files typically only contain `type` for module system hints.
+ */
+const isSyntheticPackage = (filePath: string): boolean => {
+  try {
+    const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return !('name' in content);
+  } catch (_) {
+    return false;
+  }
+};
+
 export default function moduleRoot(dir: PathLike, options: RootOptions = {}) {
   const name = options.name === undefined ? 'package.json' : options.name;
+  const isPackageJson = name === 'package.json';
+  const skipSynthetic = isPackageJson && !options.includeSynthetic;
 
   // Convert file:// URL to path if needed
   let current = fileURLToPath(dir);
   do {
-    const packagePath = path.join(current, name);
-    if (existsSync(packagePath)) {
-      if (!options.keyExists) return current;
-      if (JSON.parse(fs.readFileSync(packagePath, 'utf8'))[options.keyExists] !== undefined) return current;
+    const filePath = path.join(current, name);
+    if (existsSync(filePath)) {
+      // Skip synthetic package.json files unless includeSynthetic is true
+      if (!skipSynthetic || !isSyntheticPackage(filePath)) {
+        return current;
+      }
     }
     const next = path.dirname(current);
     if (next === current) break;
