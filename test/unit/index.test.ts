@@ -94,7 +94,7 @@ describe('module-root-sync', () => {
       moduleRoot(DATA, { name: 'who-is.json' });
       assert.ok(false);
     } catch (err) {
-      assert.ok(err.message.indexOf('Root not found') === 0);
+      assert.ok((err as Error).message.indexOf('Root not found') === 0);
     }
   });
 });
