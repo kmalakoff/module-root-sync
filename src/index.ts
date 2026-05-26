@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE);
+const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE ?? '');
 
 const existsSync = (test: string): boolean => {
   try {
