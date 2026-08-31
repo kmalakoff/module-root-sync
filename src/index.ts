@@ -1,16 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { existsSync } from './compat.ts';
 
 const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE ?? '');
-
-const existsSync = (test: string): boolean => {
-  try {
-    (fs.accessSync || fs.statSync)(test);
-    return true;
-  } catch (_) {
-    return false;
-  }
-};
 
 import type { PathLike } from './types.ts';
 

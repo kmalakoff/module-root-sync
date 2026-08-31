@@ -1,1 +1,1 @@
-ignores: ["node-version-use", "ts-dev-stack", "module-root-sync"]
+ignores: ["module-root-sync", "node-version-use", "ts-dev-stack"]
