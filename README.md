@@ -1,12 +1,18 @@
-## module-root-sync
+# module-root-sync
 
 Finds the directory that the module resides in.
+
+```bash
+npm install module-root-sync
+```
 
 ```typescript
 import moduleRoot from 'module-root-sync';
 
 const root = moduleRoot(import.meta.filename);
 ```
+
+Pass a module file path, directory, or `file://` URL. The synchronous call returns the nearest matching directory and throws when no marker is found.
 
 ### Options
 
